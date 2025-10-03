@@ -1,27 +1,32 @@
 name: Hacktoberfest Welcome
+
 on:
   pull_request_target:
     types: [opened, ready_for_review]
+
+# Permisos a nivel workflow (recomendado)
+permissions:
+  issues: write
+  pull-requests: write
+
 jobs:
   comment:
-    permissions: { pull-requests: write }
     runs-on: ubuntu-latest
     steps:
       - uses: actions/github-script@v7
         with:
           script: |
-            const body = `
-Gracias por tu contribución 💜
+            const body = `Gracias por tu contribución 💜
 
-**Para contar en Hacktoberfest**:
-- PR creado en octubre
-- No ser draft
-- Se considera **aceptado** si se **mergea**, recibe **aprobación** general o se etiqueta **hacktoberfest-accepted**
-- Aplica revisión de **7 días** (puede revertirse si es spam/invalid)
-`;
-            github.rest.issues.createComment({
+            **Para contar en Hacktoberfest**:
+            - PR creado en octubre
+            - No ser draft
+            - Se considera aceptado si se mergea, recibe aprobación general o se etiqueta hacktoberfest-accepted
+            - Aplica revisión de 7 días (puede revertirse si es spam/invalid)
+            `;
+            await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.payload.pull_request.number,
               body
-            })
+            });
