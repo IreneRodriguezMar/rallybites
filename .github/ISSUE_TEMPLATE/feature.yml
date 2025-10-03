@@ -1,0 +1,11 @@
+name: Feature
+description: Proponer una mejora
+labels: ["hacktoberfest","good first issue"]
+body:
+  - type: textarea
+    id: desc
+    attributes: { label: Descripción, placeholder: Qué y por qué }
+    validations: { required: true }
+  - type: textarea
+    id: plan
+    attributes: { label: Plan, placeholder: Pasos/criterios de aceptación }
